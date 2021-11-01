@@ -5,6 +5,7 @@
 - [Structs](#structs)
 - [Enums](#enums)
 - [Match](#match)
+- [If Let](#if-let)
 
 ## Structs
 
@@ -452,6 +453,50 @@ fn plus_one(x: Option<i32>) -> Option<i32> {
 fn main() {
     let temp = plus_one(None);
     println!("{:?}", temp);
+}
+```
+
+[back to top](#contents)
+
+## If Let
+
+If you want to match one pattern but ignoring the rest, with `match` you will write code as below.
+
+```rust
+fn main() {
+    let x: Option<i32> = Some(42);
+    match x {
+        Some(i) => {
+            println!("Result: {}", i);
+        },
+        _ => (),
+    };
+}
+```
+
+For alternative, we can use `if let` instead. The syntax `if let` takes a pattern and an expression separated by an equal sign.
+
+```rust
+fn main() {
+    let x: Option<i32> = Some(42);
+    if let Some(i) = x {
+        println!("Result: {}", i);
+    }
+}
+```
+
+Note that using `if let` means less typing, less indentation, and less boilerplate code. However, you lose the exhaustive checking that `match` enforces. Choosing between `match` and `if let` depends on what you’re doing in your particular situation and whether gaining conciseness is an appropriate trade-off for losing exhaustive checking.
+
+We can include `else` with an `if let`. `else` will behaves like `_` in `match`.
+
+```rust
+fn main() {
+    let x: Option<i32> = Some(42);
+    if let Some(i) = x {
+        println!("Result: {}", i);
+    } else {
+        println!("The result is None");
+    }
 }
 ```
 
